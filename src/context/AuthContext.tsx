@@ -1,13 +1,13 @@
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
   useReducer,
   useCallback,
 } from 'react';
-import { loginApi } from '../api/auth';
-import { registerLogout } from '../api/client';
-import { TokenStorage } from '../utils/tokenStorage';
+import { loginApi } from '@api/auth';
+import { registerLogout } from '@api/client';
+import { TokenStorage } from '@utils/tokenStorage';
 
 // ── State & Actions ────────────────────────────────────────────────────────────
 

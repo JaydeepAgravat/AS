@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 
 interface NetworkContextType {

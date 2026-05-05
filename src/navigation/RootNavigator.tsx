@@ -1,21 +1,19 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-
-import { RootStackParamList } from '../types';
-import { useAuth } from '../context/AuthContext';
-import AppText from '../components/AppText';
-
-import LoginScreen from '../screens/LoginScreen';
-import HomeScreen from '../screens/HomeScreen';
-import ProductDetailScreen from '../screens/ProductDetailScreen';
-import AppLoader from '../components/AppLoader';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
+import { RootStackParamList } from '@appTypes/index';
+import AppText from '@components/AppText';
+import { COLORS } from '@config/colors';
+import { rms, rs } from '@utils/scaling';
+import { useAuth } from '@context/AuthContext';
+import AppLoader from '@components/AppLoader';
+import LoginScreen from '@screens/LoginScreen';
+import HomeScreen from '@screens/HomeScreen';
+import ProductDetailScreen from '@screens/ProductDetailScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

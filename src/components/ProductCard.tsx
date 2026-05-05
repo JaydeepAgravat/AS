@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { Product } from '@appTypes/index';
+import { useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -6,10 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Product } from '../types';
 import AppText from './AppText';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
+import { COLORS } from '@config/colors';
+import { rms, rs } from '@utils/scaling';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;

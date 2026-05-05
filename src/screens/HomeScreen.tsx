@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -10,16 +10,15 @@ import {
   View,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-
-import { Product, RootStackParamList } from '../types';
-import { useProducts } from '../context/ProductContext';
-import { useNetwork } from '../context/NetworkContext';
-import AppText from '../components/AppText';
-import ProductCard from '../components/ProductCard';
-import AppLoader from '../components/AppLoader';
-import ErrorMessage from '../components/ErrorMessage';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
+import { Product, RootStackParamList } from '@appTypes/index';
+import { useProducts } from '@context/ProductContext';
+import { useNetwork } from '@context/NetworkContext';
+import ProductCard from '@components/ProductCard';
+import AppLoader from '@components/AppLoader';
+import ErrorMessage from '@components/ErrorMessage';
+import AppText from '@components/AppText';
+import { COLORS } from '@config/colors';
+import { rms, rs } from '@utils/scaling';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 

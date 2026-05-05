@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from './client';
-import { AuthTokens } from '../types';
+import { AuthTokens } from '@appTypes/index';
 
 interface LoginPayload {
   username: string;

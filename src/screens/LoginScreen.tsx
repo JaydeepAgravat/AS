@@ -1,4 +1,9 @@
-import React, { useRef, useState } from 'react';
+import AppText from '@components/AppText';
+import { COLORS } from '@config/colors';
+import { useAuth } from '@context/AuthContext';
+import { useNetwork } from '@context/NetworkContext';
+import { rms, rs } from '@utils/scaling';
+import { useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -10,11 +15,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AppText from '../components/AppText';
-import { useAuth } from '../context/AuthContext';
-import { useNetwork } from '../context/NetworkContext';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
 
 // FakeStoreAPI test credentials: mor_2314 / 83r5^_
 

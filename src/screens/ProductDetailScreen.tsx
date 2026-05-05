@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -7,12 +7,11 @@ import {
   View,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-
-import { RootStackParamList } from '../types';
-import AppText from '../components/AppText';
-import RatingStars from '../components/RatingStars';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
+import { RootStackParamList } from '@appTypes/index';
+import AppText from '@components/AppText';
+import RatingStars from '@components/RatingStars';
+import { rms, rs } from '@utils/scaling';
+import { COLORS } from '@config/colors';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetail'>;
 

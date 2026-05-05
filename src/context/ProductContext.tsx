@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useCallback,
   useContext,
@@ -6,8 +6,8 @@ import React, {
   useRef,
 } from 'react';
 import NetInfo from '@react-native-community/netinfo';
-import { fetchProductsApi } from '../api/products';
-import { Product } from '../types';
+import { Product } from '@appTypes/index';
+import { fetchProductsApi } from '@api/products';
 
 // ── State & Actions ────────────────────────────────────────────────────────────
 

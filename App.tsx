@@ -6,7 +6,9 @@ import BootSplash from 'react-native-bootsplash';
 import { NetworkProvider } from '@context/NetworkContext';
 import { AuthProvider, useAuth } from '@context/AuthContext';
 import { ProductProvider } from '@context/ProductContext';
+import { PopupProvider } from '@context/PopupContext';
 import RootNavigator from '@navigation/RootNavigator';
+import PopupManager from '@components/PopupManager';
 import OfflineBanner from '@components/OfflineBanner';
 
 const AppContent = () => {
@@ -23,6 +25,7 @@ const AppContent = () => {
       <StatusBar barStyle={'dark-content'} />
       <RootNavigator />
       <OfflineBanner />
+      <PopupManager />
     </View>
   );
 };
@@ -33,7 +36,9 @@ const App = () => {
       <NetworkProvider>
         <AuthProvider>
           <ProductProvider>
-            <AppContent />
+            <PopupProvider>
+              <AppContent />
+            </PopupProvider>
           </ProductProvider>
         </AuthProvider>
       </NetworkProvider>

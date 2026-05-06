@@ -10,6 +10,7 @@ import AppText from '@components/AppText';
 import { COLORS } from '@config/colors';
 import { rms, rs } from '@utils/scaling';
 import { useAuth } from '@context/AuthContext';
+import { usePopup } from '@context/PopupContext';
 import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import ProductDetailScreen from '@screens/ProductDetailScreen';
@@ -21,15 +22,30 @@ interface LogoutButtonProps {
   onLogout: () => void;
 }
 
-const LogoutButton = ({ onLogout }: LogoutButtonProps) => (
-  <TouchableOpacity
-    style={styles.logoutBtn}
-    onPress={onLogout}
-    hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-  >
-    <AppText style={styles.logoutText}>Logout</AppText>
-  </TouchableOpacity>
-);
+const LogoutButton = ({ onLogout }: LogoutButtonProps) => {
+  const { showPopup } = usePopup();
+
+  const handleLogoutPress = useCallback(() => {
+    showPopup({
+      title: 'Logout',
+      message: 'Are you sure you want to logout from your account?',
+      confirmText: 'Logout',
+      cancelText: 'Cancel',
+      isDanger: true,
+      onConfirm: onLogout,
+    });
+  }, [showPopup, onLogout]);
+
+  return (
+    <TouchableOpacity
+      style={styles.logoutBtn}
+      onPress={handleLogoutPress}
+      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+    >
+      <AppText style={styles.logoutText}>Logout</AppText>
+    </TouchableOpacity>
+  );
+};
 
 const sharedScreenOptions: NativeStackNavigationOptions = {
   headerStyle: { backgroundColor: COLORS.background.primary },

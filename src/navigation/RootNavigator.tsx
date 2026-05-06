@@ -14,6 +14,7 @@ import AppLoader from '@components/AppLoader';
 import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import ProductDetailScreen from '@screens/ProductDetailScreen';
+import { FONTS } from '@config/fonts';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,7 +37,7 @@ const sharedScreenOptions: NativeStackNavigationOptions = {
   headerTintColor: COLORS.primary.main,
   headerShadowVisible: false,
   headerTitleStyle: {
-    fontWeight: '700',
+    fontFamily: FONTS.MANROPE_BOLD,
     color: COLORS.text.primary,
     fontSize: rms(17),
   },
@@ -96,8 +97,8 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     fontSize: rms(15),
-    fontWeight: '600',
     color: COLORS.error.main,
+    fontFamily: FONTS.MANROPE_MEDIUM,
   },
 });
 

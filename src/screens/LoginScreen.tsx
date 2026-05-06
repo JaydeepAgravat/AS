@@ -1,5 +1,6 @@
 import AppText from '@components/AppText';
 import { COLORS } from '@config/colors';
+import { FONTS } from '@config/fonts';
 import { useAuth } from '@context/AuthContext';
 import { useNetwork } from '@context/NetworkContext';
 import { rms, rs } from '@utils/scaling';
@@ -240,9 +241,9 @@ const styles = StyleSheet.create({
   logoEmoji: { fontSize: rms(36) },
   title: {
     fontSize: rms(28),
-    fontWeight: '800',
     color: COLORS.text.primary,
     letterSpacing: -0.5,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   subtitle: {
     fontSize: rms(15),
@@ -271,8 +272,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: rms(14),
-    fontWeight: '600',
     color: COLORS.text.label,
+    fontFamily: FONTS.MANROPE_MEDIUM,
   },
   input: {
     backgroundColor: COLORS.background.input,
@@ -304,8 +305,8 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: COLORS.white,
     fontSize: rms(16),
-    fontWeight: '700',
     letterSpacing: 0.3,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   hintBox: {
     marginTop: rs(32),
@@ -318,23 +319,21 @@ const styles = StyleSheet.create({
   },
   hintTitle: {
     fontSize: rms(11),
-    fontWeight: '700',
     color: COLORS.success.dark,
     textTransform: 'uppercase',
     letterSpacing: 0.6,
     marginBottom: rs(6),
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   hintRow: {
     fontSize: rms(13),
   },
   hintKey: {
     color: COLORS.text.secondary,
-    fontWeight: '500',
   },
   hintValue: {
     color: COLORS.success.dark,
-    fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
-    fontWeight: '600',
+    fontFamily: FONTS.MANROPE_MEDIUM,
   },
 });
 

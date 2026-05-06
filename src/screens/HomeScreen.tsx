@@ -19,6 +19,7 @@ import ErrorMessage from '@components/ErrorMessage';
 import AppText from '@components/AppText';
 import { COLORS } from '@config/colors';
 import { rms, rs } from '@utils/scaling';
+import { FONTS } from '@config/fonts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
   },
   inlineRetry: {
     fontSize: rms(13),
-    fontWeight: '700',
+    fontFamily: FONTS.MANROPE_BOLD,
     color: COLORS.primary.main,
     marginLeft: rs(12),
   },
@@ -262,7 +263,7 @@ const styles = StyleSheet.create({
   emptyIcon: { fontSize: rms(48) },
   emptyTitle: {
     fontSize: rms(17),
-    fontWeight: '600',
+    fontFamily: FONTS.MANROPE_MEDIUM,
     color: COLORS.text.primary,
   },
   emptySubtitle: {

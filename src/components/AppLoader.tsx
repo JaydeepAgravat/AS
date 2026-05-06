@@ -1,4 +1,3 @@
-import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import AppText from './AppText';
 import { COLORS } from '../config/colors';
@@ -8,7 +7,7 @@ interface Props {
   message?: string;
 }
 
-const AppLoader: React.FC<Props> = ({ message }) => (
+const AppLoader = ({ message }: Props) => (
   <View style={styles.container}>
     <ActivityIndicator size="large" color={COLORS.primary.main} />
     {message ? <AppText style={styles.message}>{message}</AppText> : null}

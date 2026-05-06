@@ -4,6 +4,7 @@ import { useNetwork } from '../context/NetworkContext';
 import { COLORS } from '../config/colors';
 import { rs, rms } from '../utils/scaling';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FONTS } from '@config/fonts';
 
 const BANNER_HEIGHT = 44;
 
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: rms(13),
-    fontWeight: '600',
+    fontFamily: FONTS.MANROPE_MEDIUM,
     color: COLORS.white,
     letterSpacing: 0.2,
   },

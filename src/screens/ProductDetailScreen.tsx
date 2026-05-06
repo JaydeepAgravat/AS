@@ -12,6 +12,7 @@ import AppText from '@components/AppText';
 import RatingStars from '@components/RatingStars';
 import { rms, rs } from '@utils/scaling';
 import { COLORS } from '@config/colors';
+import { FONTS } from '@config/fonts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetail'>;
 
@@ -115,23 +116,23 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: rms(10),
-    fontWeight: '700',
     color: COLORS.primary.dark,
     letterSpacing: 0.8,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   title: {
     fontSize: rms(20),
-    fontWeight: '700',
     color: COLORS.text.primary,
     lineHeight: rms(28),
     letterSpacing: -0.3,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   price: {
     fontSize: rms(30),
-    fontWeight: '800',
     color: COLORS.primary.main,
     marginTop: rs(10),
     letterSpacing: -0.5,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   divider: {
     height: 1,
@@ -140,9 +141,9 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: rms(16),
-    fontWeight: '700',
     color: COLORS.text.primary,
     marginBottom: rs(10),
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   description: {
     fontSize: rms(14),
@@ -164,7 +165,6 @@ const styles = StyleSheet.create({
   stockText: {
     fontSize: rms(13),
     color: COLORS.success.dark,
-    fontWeight: '500',
   },
   cartButton: {
     backgroundColor: COLORS.primary.main,
@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
   cartButtonText: {
     color: COLORS.white,
     fontSize: rms(16),
-    fontWeight: '700',
     letterSpacing: 0.3,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   wishlistButton: {
     borderRadius: rs(14),
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   wishlistButtonText: {
     color: COLORS.text.label,
     fontSize: rms(15),
-    fontWeight: '600',
+    fontFamily: FONTS.MANROPE_MEDIUM,
   },
 });
 

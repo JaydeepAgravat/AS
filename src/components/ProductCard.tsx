@@ -10,6 +10,7 @@ import {
 import AppText from './AppText';
 import { COLORS } from '@config/colors';
 import { rms, rs } from '@utils/scaling';
+import { FONTS } from '@config/fonts';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: rms(12),
-    fontWeight: '500',
     color: COLORS.text.primary,
     lineHeight: rms(17),
     minHeight: rs(34),
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: rms(14),
-    fontWeight: '700',
     color: COLORS.primary.main,
+    fontFamily: FONTS.MANROPE_BOLD,
   },
   ratingChip: {
     flexDirection: 'row',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: rms(10),
     color: COLORS.secondary.dark,
-    fontWeight: '600',
+    fontFamily: FONTS.MANROPE_MEDIUM,
   },
 });
 

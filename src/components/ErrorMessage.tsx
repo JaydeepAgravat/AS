@@ -1,15 +1,15 @@
-import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AppText from './AppText';
 import { COLORS } from '../config/colors';
 import { rs, rms } from '../utils/scaling';
+import { FONTS } from '@config/fonts';
 
 interface Props {
   message: string;
   onRetry?: () => void;
 }
 
-const ErrorMessage: React.FC<Props> = ({ message, onRetry }) => (
+const ErrorMessage = ({ message, onRetry }: Props) => (
   <View style={styles.container}>
     <AppText style={styles.icon}>⚠️</AppText>
     <AppText style={styles.title}>Something went wrong</AppText>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   icon: { fontSize: rms(48), marginBottom: rs(16) },
   title: {
     fontSize: rms(18),
-    fontWeight: '700',
+    fontFamily: FONTS.MANROPE_BOLD,
     color: COLORS.text.primary,
     marginBottom: rs(8),
   },
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLORS.white,
-    fontWeight: '600',
     fontSize: rms(15),
+    fontFamily: FONTS.MANROPE_MEDIUM,
   },
 });
 

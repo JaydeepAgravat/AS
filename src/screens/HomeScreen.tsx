@@ -25,7 +25,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const PAGE_SIZE = 8;
 
-const HomeScreen: React.FC<Props> = ({ navigation }) => {
+const HomeScreen = ({ navigation }: Props) => {
   const {
     filteredProducts,
     products,

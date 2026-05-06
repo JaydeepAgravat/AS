@@ -76,9 +76,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 // ── Provider ──────────────────────────────────────────────────────────────────
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Register logout handler with API client (runs once; dispatch is stable)

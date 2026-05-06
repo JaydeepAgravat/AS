@@ -20,7 +20,7 @@ interface Props {
   onPress: () => void;
 }
 
-const ProductCard: React.FC<Props> = ({ product, onPress }) => {
+const ProductCard = ({ product, onPress }: Props) => {
   const [imgError, setImgError] = useState(false);
 
   return (

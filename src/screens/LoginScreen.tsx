@@ -1,6 +1,7 @@
 import AppText from '@components/AppText';
 import { COLORS } from '@config/colors';
 import { FONTS } from '@config/fonts';
+import { ICONS } from '@config/icons';
 import { useAuth } from '@context/AuthContext';
 import { useNetwork } from '@context/NetworkContext';
 import { rms, rs } from '@utils/scaling';
@@ -8,6 +9,7 @@ import { useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -24,7 +26,7 @@ interface FieldErrors {
   password?: string;
 }
 
-const LoginScreen: React.FC = () => {
+const LoginScreen = () => {
   const [username, setUsername] = useState('mor_2314');
   const [password, setPassword] = useState('83r5^_');
   const [isLoading, setIsLoading] = useState(false);
@@ -106,7 +108,7 @@ const LoginScreen: React.FC = () => {
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.logoBox}>
-            <AppText style={styles.logoEmoji}>🛍️</AppText>
+            <Image source={ICONS.BAG} style={styles.bagIcon} />
           </View>
           <AppText style={styles.title}>Welcome Back</AppText>
           <AppText style={styles.subtitle}>Sign in to continue</AppText>
@@ -238,7 +240,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.primary.lighter,
   },
-  logoEmoji: { fontSize: rms(36) },
+  bagIcon: {
+    width: rs(56),
+    height: rs(56),
+  },
   title: {
     fontSize: rms(28),
     color: COLORS.text.primary,

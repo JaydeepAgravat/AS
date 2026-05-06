@@ -119,8 +119,10 @@ function resolveErrorMessage(err: any): string {
 
 // ── Provider ──────────────────────────────────────────────────────────────────
 
-export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
+export const ProductProvider = ({
   children,
+}: {
+  children: React.ReactNode;
 }) => {
   const [state, dispatch] = useReducer(productReducer, initialState);
 

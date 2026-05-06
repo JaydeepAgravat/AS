@@ -14,8 +14,10 @@ const NetworkContext = createContext<NetworkContextType>({
   justReconnected: false,
 });
 
-export const NetworkProvider: React.FC<{ children: React.ReactNode }> = ({
+export const NetworkProvider = ({
   children,
+}: {
+  children: React.ReactNode;
 }) => {
   const [isConnected, setIsConnected] = useState(true);
   const [isInternetReachable, setIsInternetReachable] = useState<

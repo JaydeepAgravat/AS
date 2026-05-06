@@ -8,7 +8,7 @@ import { FONTS } from '@config/fonts';
 
 const BANNER_HEIGHT = 44;
 
-const OfflineBanner: React.FC = () => {
+const OfflineBanner = () => {
   const { top } = useSafeAreaInsets();
   const { isConnected } = useNetwork();
 

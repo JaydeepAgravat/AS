@@ -16,7 +16,7 @@ import { FONTS } from '@config/fonts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetail'>;
 
-const ProductDetailScreen: React.FC<Props> = ({ route }) => {
+const ProductDetailScreen = ({ route }: Props) => {
   const { product } = route.params;
   const [imgError, setImgError] = useState(false);
 

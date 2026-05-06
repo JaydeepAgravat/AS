@@ -10,7 +10,6 @@ import AppText from '@components/AppText';
 import { COLORS } from '@config/colors';
 import { rms, rs } from '@utils/scaling';
 import { useAuth } from '@context/AuthContext';
-import AppLoader from '@components/AppLoader';
 import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import ProductDetailScreen from '@screens/ProductDetailScreen';
@@ -22,7 +21,7 @@ interface LogoutButtonProps {
   onLogout: () => void;
 }
 
-const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => (
+const LogoutButton = ({ onLogout }: LogoutButtonProps) => (
   <TouchableOpacity
     style={styles.logoutBtn}
     onPress={onLogout}
@@ -44,16 +43,13 @@ const sharedScreenOptions: NativeStackNavigationOptions = {
   contentStyle: { backgroundColor: COLORS.background.primary },
 };
 
-const RootNavigator: React.FC = () => {
-  const { isAuthenticated, isInitializing, logout } = useAuth();
+const RootNavigator = () => {
+  const { isAuthenticated, logout } = useAuth();
 
   const renderLogoutButton = useCallback(
     () => <LogoutButton onLogout={logout} />,
     [logout],
   );
-
-  // Block render until MMKV token check completes (synchronous, very fast)
-  if (isInitializing) return <AppLoader />;
 
   return (
     <NavigationContainer>

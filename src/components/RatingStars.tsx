@@ -8,7 +8,7 @@ interface Props {
   count: number;
 }
 
-const RatingStars: React.FC<Props> = ({ rate, count }) => {
+const RatingStars = ({ rate, count }: Props) => {
   const fullStars = Math.floor(rate);
   const hasHalf = rate - fullStars >= 0.5;
 

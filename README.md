@@ -1,18 +1,21 @@
-# RN MaxLence
+## App Demo
 
-React Native app for browsing products, viewing details, and logging in.
+<p align="center">
+  <a href="https://www.youtube.com/shorts/-T0zntrmsHk">
+    <img src="https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg" width="300" />
+  </a>
+</p>
 
-## App Preview
+<p align="center">
+  iOS & Android Demo
+</p>
+
+## App Demo
 
 ### iOS
 
-<img src="docs/product-hub-ios.gif" alt="iOS app preview" />
+[![iOS Demo](https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg)](https://www.youtube.com/shorts/-T0zntrmsHk)
 
 ### Android
 
-<img src="docs/product-hub-android.gif" alt="Android app preview" />
-
-If the Android preview does not render on GitHub, open the GIF directly here:
-[product-hub-android.gif](docs/product-hub-android.gif)
-
-Note: the Android GIF is large, and GitHub may not render oversized media in README previews.
+[![Android Demo](https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg)](https://www.youtube.com/shorts/-T0zntrmsHk)

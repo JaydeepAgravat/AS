@@ -1,25 +1,32 @@
-## App Demo
+## 📱 App Demo
 
-### iOS
+<table align="center">
+  <tr>
+    <td align="center">
+      <h3>iOS</h3>
+      <a href="https://www.youtube.com/shorts/-T0zntrmsHk">
+        <img
+          src="https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg"
+          width="260"
+          alt="iOS Demo"
+        />
+      </a>
+    </td>
 
-[![iOS Demo](https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg)](https://www.youtube.com/shorts/-T0zntrmsHk)
+    <td align="center">
+      <h3>Android</h3>
+      <a href="https://www.youtube.com/shorts/-T0zntrmsHk">
+        <img
+          src="https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg"
+          width="260"
+          alt="Android Demo"
+        />
+      </a>
+    </td>
 
-### Android
-
-[![Android Demo](https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg)](https://www.youtube.com/shorts/-T0zntrmsHk)
-
-## App Demo
+  </tr>
+</table>
 
 <p align="center">
-  <a href="https://www.youtube.com/shorts/-T0zntrmsHk">
-    <img
-      src="https://img.youtube.com/vi/-T0zntrmsHk/maxresdefault.jpg"
-      width="300"
-      alt="App Demo"
-    />
-  </a>
-</p>
-
-<p align="center">
-  Click the thumbnail to watch the demo video
+  Click on a thumbnail to watch the demo video
 </p>

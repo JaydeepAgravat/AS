@@ -1,4 +1,4 @@
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import AppText from './AppText';
 import { useNetwork } from '../context/NetworkContext';
 import { COLORS } from '../config/colors';
@@ -9,7 +9,7 @@ import { FONTS } from '@config/fonts';
 const BANNER_HEIGHT = 44;
 
 const OfflineBanner = () => {
-  const { top } = useSafeAreaInsets();
+  const { bottom } = useSafeAreaInsets();
   const { isConnected } = useNetwork();
 
   if (isConnected) {
@@ -17,10 +17,10 @@ const OfflineBanner = () => {
   }
 
   return (
-    <Animated.View style={[styles.banner, { top }]}>
+    <View style={[styles.banner, { bottom }]}>
       <AppText style={styles.dot}>●</AppText>
       <AppText style={styles.text}>No Internet Connection</AppText>
-    </Animated.View>
+    </View>
   );
 };
 

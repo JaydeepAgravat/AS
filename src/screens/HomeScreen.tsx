@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   grid: {
     paddingHorizontal: rs(8),
     paddingTop: rs(8),
-    paddingBottom: rs(60), // avoid overlap with offline banner
+    paddingBottom: rs(100),
   },
   emptyContainer: {
     alignItems: 'center',

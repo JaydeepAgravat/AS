@@ -10,8 +10,7 @@
     "start": "react-native start",
     "test": "jest",
     "aliases": "node setup-alias-dynamic.js",
-    "check:deprecated": "eslint . --ext .ts,.tsx --rule '{\"@typescript-eslint/no-deprecated\": \"error\"}'",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+    "check:deprecated": "eslint . --ext .ts,.tsx --rule '{\"@typescript-eslint/no-deprecated\": \"error\"}'"
   },
   "dependencies": {
     "@d11/react-native-fast-image": "^8.13.0",

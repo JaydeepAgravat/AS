@@ -6,11 +6,11 @@ React Native app for browsing products, viewing details, and logging in.
 
 ### iOS
 
-![iOS app preview](docs/product-hub-ios.gif)
+<img src="docs/product-hub-ios.gif" alt="iOS app preview" />
 
 ### Android
 
-![Android app preview](docs/product-hub-android.gif)
+<img src="docs/product-hub-android.gif" alt="Android app preview" />
 
 If the Android preview does not render on GitHub, open the GIF directly here:
 [product-hub-android.gif](docs/product-hub-android.gif)

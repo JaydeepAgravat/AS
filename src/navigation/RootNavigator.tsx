@@ -6,7 +6,6 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@appTypes/index';
-import AppText from '@components/AppText';
 import { COLORS } from '@config/colors';
 import { rms, rs } from '@utils/scaling';
 import { useAuth } from '@context/AuthContext';
@@ -15,6 +14,8 @@ import LoginScreen from '@screens/LoginScreen';
 import HomeScreen from '@screens/HomeScreen';
 import ProductDetailScreen from '@screens/ProductDetailScreen';
 import { FONTS } from '@config/fonts';
+import { SCREENS } from '@utils/screens';
+import AppText from '@components/shared/AppText';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -72,14 +73,14 @@ const RootNavigator = () => {
       <Stack.Navigator screenOptions={sharedScreenOptions}>
         {!isAuthenticated ? (
           <Stack.Screen
-            name="Login"
+            name={SCREENS.LOGIN}
             component={LoginScreen}
             options={{ headerShown: false }}
           />
         ) : (
           <>
             <Stack.Screen
-              name="Home"
+              name={SCREENS.HOME}
               component={HomeScreen}
               options={{
                 title: 'Products',
@@ -87,7 +88,7 @@ const RootNavigator = () => {
               }}
             />
             <Stack.Screen
-              name="ProductDetail"
+              name={SCREENS.PRODUCT_DETAILS}
               component={ProductDetailScreen}
               options={{
                 title: 'Product Detail',

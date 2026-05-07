@@ -1,3 +1,6 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { SCREENS } from '@utils/screens';
+
 export interface Product {
   id: number;
   title: string;
@@ -17,7 +20,10 @@ export interface AuthTokens {
 }
 
 export type RootStackParamList = {
-  Login: undefined;
-  Home: undefined;
-  ProductDetail: { product: Product };
+  [SCREENS.LOGIN]: undefined;
+  [SCREENS.HOME]: undefined;
+  [SCREENS.PRODUCT_DETAILS]: { product: Product };
 };
+
+export type AppStackScreenProps<T extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, T>;

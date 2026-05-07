@@ -8,6 +8,10 @@ import {
 import { loginApi } from '@api/auth';
 import { registerLogout } from '@api/client';
 import { TokenStorage } from '@utils/tokenStorage';
+import {
+  clearAppImageDiskCache,
+  clearAppImageMemoryCache,
+} from '@components/shared/AppImage';
 
 // ── State & Actions ────────────────────────────────────────────────────────────
 
@@ -106,12 +110,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     },
     [],
   );
-
-  const logout = useCallback((): void => {
+  const logout = useCallback(async () => {
     TokenStorage.clearTokens();
+
+    await Promise.all([clearAppImageMemoryCache(), clearAppImageDiskCache()]);
+
     dispatch({ type: 'LOGOUT' });
   }, []);
-
   return (
     <AuthContext.Provider value={{ ...state, login, logout }}>
       {children}

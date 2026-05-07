@@ -1,7 +1,7 @@
+import { COLORS } from '@config/colors';
+import { FONTS } from '@config/fonts';
+import { rms } from '@utils/scaling';
 import { StyleSheet, Text, type TextProps } from 'react-native';
-import { FONTS } from '../config/fonts';
-import { COLORS } from '../config/colors';
-import { rms } from '../utils/scaling';
 
 const AppText = (props: TextProps) => {
   return (

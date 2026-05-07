@@ -1,7 +1,7 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import AppText from './AppText';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
+import { COLORS } from '@config/colors';
+import { rms, rs } from '@utils/scaling';
 
 interface Props {
   message?: string;

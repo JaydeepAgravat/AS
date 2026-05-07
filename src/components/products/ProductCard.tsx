@@ -1,16 +1,10 @@
 import { Product } from '@appTypes/index';
-import { useState } from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import AppText from './AppText';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import AppText from '@components/shared/AppText';
 import { COLORS } from '@config/colors';
 import { rms, rs } from '@utils/scaling';
 import { FONTS } from '@config/fonts';
+import AppImage from '@components/shared/AppImage';
 
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
@@ -21,8 +15,6 @@ interface Props {
 }
 
 const ProductCard = ({ product, onPress }: Props) => {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <TouchableOpacity
       style={styles.card}
@@ -30,18 +22,7 @@ const ProductCard = ({ product, onPress }: Props) => {
       activeOpacity={0.85}
     >
       <View style={styles.imageContainer}>
-        {imgError ? (
-          <View style={styles.imageFallback}>
-            <AppText style={styles.fallbackText}>🖼</AppText>
-          </View>
-        ) : (
-          <Image
-            source={{ uri: product.image }}
-            style={styles.image}
-            resizeMode="contain"
-            onError={() => setImgError(true)}
-          />
-        )}
+        <AppImage source={{ uri: product.image }} style={styles.image} />
       </View>
 
       <View style={styles.info}>

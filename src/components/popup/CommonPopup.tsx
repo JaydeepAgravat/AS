@@ -8,7 +8,7 @@ import {
 import { COLORS } from '@config/colors';
 import { FONTS } from '@config/fonts';
 import { rms, rs } from '@utils/scaling';
-import AppText from './AppText';
+import AppText from '@components/shared/AppText';
 
 interface CommonPopupProps {
   visible: boolean;

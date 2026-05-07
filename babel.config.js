@@ -11,6 +11,7 @@ module.exports = {
           '@components': './src/components',
           '@config': './src/config',
           '@context': './src/context',
+          '@hooks': './src/hooks',
           '@navigation': './src/navigation',
           '@screens': './src/screens',
           '@appTypes': './src/appTypes',

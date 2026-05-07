@@ -1,10 +1,10 @@
 import { StyleSheet, View } from 'react-native';
-import AppText from './AppText';
-import { useNetwork } from '../context/NetworkContext';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FONTS } from '@config/fonts';
+import { useNetwork } from '@context/NetworkContext';
+import AppText from '@components/shared/AppText';
+import { COLORS } from '@config/colors';
+import { rms, rs } from '@utils/scaling';
 
 const BANNER_HEIGHT = 44;
 

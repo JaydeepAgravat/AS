@@ -8,8 +8,8 @@ import { AuthProvider, useAuth } from '@context/AuthContext';
 import { ProductProvider } from '@context/ProductContext';
 import { PopupProvider } from '@context/PopupContext';
 import RootNavigator from '@navigation/RootNavigator';
-import PopupManager from '@components/PopupManager';
-import OfflineBanner from '@components/OfflineBanner';
+import OfflineBanner from '@components/feedback/OfflineBanner';
+import PopupManager from '@components/popup/PopupManager';
 
 const AppContent = () => {
   const { isInitializing } = useAuth();

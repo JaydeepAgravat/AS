@@ -1,8 +1,8 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import AppText from './AppText';
-import { COLORS } from '../config/colors';
-import { rs, rms } from '../utils/scaling';
+import AppText from '@components/shared/AppText';
 import { FONTS } from '@config/fonts';
+import { COLORS } from '@config/colors';
+import { rms, rs } from '@utils/scaling';
 
 interface Props {
   message: string;

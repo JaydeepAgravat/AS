@@ -1,27 +1,22 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Platform,
-  RefreshControl,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Product, RootStackParamList } from '@appTypes/index';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { AppStackScreenProps, Product } from '@appTypes/index';
 import { useProducts } from '@context/ProductContext';
 import { useNetwork } from '@context/NetworkContext';
-import ProductCard from '@components/ProductCard';
-import AppLoader from '@components/AppLoader';
-import ErrorMessage from '@components/ErrorMessage';
-import AppText from '@components/AppText';
+import { useDebounce } from '@hooks/useDebounce';
 import { COLORS } from '@config/colors';
-import { rms, rs } from '@utils/scaling';
-import { FONTS } from '@config/fonts';
+import { rs } from '@utils/scaling';
+import { SCREENS } from '@utils/screens';
+import AppLoader from '@components/shared/AppLoader';
+import ErrorMessage from '@components/feedback/ErrorMessage';
+import ErrorBanner from '@components/feedback/ErrorBanner';
+import SearchBar from '@components/search/SearchBar';
+import SearchResults from '@components/search/SearchResults';
+import ProductListFooter from '@components/products/ProductListFooter';
+import ProductListEmpty from '@components/products/ProductListEmpty';
+import ProductCard from '@components/products/ProductCard';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = AppStackScreenProps<typeof SCREENS.HOME>;
 
 const PAGE_SIZE = 8;
 
@@ -40,6 +35,20 @@ const HomeScreen = ({ navigation }: Props) => {
 
   const { justReconnected } = useNetwork();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
+
+  // Use custom debounce hook
+  const debouncedSearchQuery = useDebounce(localSearchQuery, 300);
+
+  // Update context when debounced value changes
+  useEffect(() => {
+    setSearchQuery(debouncedSearchQuery);
+  }, [debouncedSearchQuery, setSearchQuery]);
+
+  // Sync local state when context searchQuery changes externally
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery);
+  }, [searchQuery]);
 
   useEffect(() => {
     fetchProducts();
@@ -78,7 +87,9 @@ const HomeScreen = ({ navigation }: Props) => {
     ({ item }: { item: Product }) => (
       <ProductCard
         product={item}
-        onPress={() => navigation.navigate('ProductDetail', { product: item })}
+        onPress={() =>
+          navigation.navigate(SCREENS.PRODUCT_DETAILS, { product: item })
+        }
       />
     ),
     [navigation],
@@ -105,43 +116,18 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {error && products.length > 0 ? (
-        <View style={styles.inlineError}>
-          <AppText style={styles.inlineErrorText}>{error}</AppText>
-          <TouchableOpacity
-            onPress={() => {
-              clearError();
-              fetchProducts(true);
-            }}
-          >
-            <AppText style={styles.inlineRetry}>Retry</AppText>
-          </TouchableOpacity>
-        </View>
-      ) : null}
-
-      <View style={styles.searchWrapper}>
-        <AppText style={styles.searchIcon}>🔍</AppText>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search products..."
-          placeholderTextColor={COLORS.text.placeholder}
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          returnKeyType="search"
-          clearButtonMode="while-editing"
+        <ErrorBanner
+          message={error}
+          onRetry={() => {
+            clearError();
+            fetchProducts(true);
+          }}
         />
-        {Platform.OS === 'android' && searchQuery.length > 0 ? (
-          <TouchableOpacity onPress={() => setSearchQuery('')}>
-            <AppText style={styles.clearBtn}>✕</AppText>
-          </TouchableOpacity>
-        ) : null}
-      </View>
-
-      {searchQuery.trim().length > 0 ? (
-        <AppText style={styles.resultCount}>
-          {filteredProducts.length} result
-          {filteredProducts.length !== 1 ? 's' : ''} for "{searchQuery}"
-        </AppText>
       ) : null}
+
+      <SearchBar value={localSearchQuery} onChangeText={setLocalSearchQuery} />
+
+      <SearchResults count={filteredProducts.length} query={searchQuery} />
 
       <FlatList
         data={paginatedProducts}
@@ -163,113 +149,25 @@ const HomeScreen = ({ navigation }: Props) => {
           />
         }
         ListFooterComponent={
-          visibleCount < filteredProducts.length ? (
-            <View style={styles.footerLoading}>
-              <ActivityIndicator size="small" color={COLORS.primary.main} />
-              <AppText style={styles.footerText}>Loading more products</AppText>
-            </View>
-          ) : null
+          <ProductListFooter
+            isLoading={visibleCount < filteredProducts.length}
+          />
         }
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <AppText style={styles.emptyIcon}>🔍</AppText>
-            <AppText style={styles.emptyTitle}>No products found</AppText>
-            <AppText style={styles.emptySubtitle}>
-              Try a different search term
-            </AppText>
-          </View>
-        }
+        ListEmptyComponent={<ProductListEmpty />}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.background.primary },
-  inlineError: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: COLORS.error.light,
-    paddingHorizontal: rs(16),
-    paddingVertical: rs(10),
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.error.border,
-  },
-  inlineErrorText: {
+  container: {
     flex: 1,
-    fontSize: rms(13),
-    color: COLORS.error.dark,
-    lineHeight: rms(18),
-  },
-  inlineRetry: {
-    fontSize: rms(13),
-    fontFamily: FONTS.MANROPE_BOLD,
-    color: COLORS.primary.main,
-    marginLeft: rs(12),
-  },
-  searchWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: COLORS.background.card,
-    marginHorizontal: rs(16),
-    marginTop: rs(12),
-    marginBottom: rs(4),
-    borderRadius: rs(12),
-    paddingHorizontal: rs(12),
-    height: rs(46),
-    borderWidth: 1.5,
-    borderColor: COLORS.border.primary,
-    gap: rs(8),
-  },
-  searchIcon: { fontSize: rms(15) },
-  searchInput: {
-    flex: 1,
-    fontSize: rms(15),
-    color: COLORS.text.primary,
-    paddingVertical: 0,
-  },
-  clearBtn: {
-    fontSize: rms(14),
-    color: COLORS.text.placeholder,
-    padding: rs(4),
-  },
-  resultCount: {
-    fontSize: rms(12),
-    color: COLORS.text.tertiary,
-    marginHorizontal: rs(16),
-    marginBottom: rs(2),
+    backgroundColor: COLORS.background.primary,
   },
   grid: {
     paddingHorizontal: rs(8),
     paddingTop: rs(8),
     paddingBottom: rs(100),
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    paddingTop: rs(80),
-    gap: rs(8),
-  },
-  emptyIcon: { fontSize: rms(48) },
-  emptyTitle: {
-    fontSize: rms(17),
-    fontFamily: FONTS.MANROPE_MEDIUM,
-    color: COLORS.text.primary,
-  },
-  emptySubtitle: {
-    fontSize: rms(14),
-    color: COLORS.text.tertiary,
-  },
-  footerLoading: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: rs(8),
-    paddingVertical: rs(16),
-  },
-  footerText: {
-    fontSize: rms(13),
-    color: COLORS.text.tertiary,
   },
 });
 

@@ -1,24 +1,17 @@
-import { useState } from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@appTypes/index';
-import AppText from '@components/AppText';
-import RatingStars from '@components/RatingStars';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { AppStackScreenProps } from '@appTypes/index';
 import { rms, rs } from '@utils/scaling';
 import { COLORS } from '@config/colors';
 import { FONTS } from '@config/fonts';
+import { SCREENS } from '@utils/screens';
+import AppImage from '@components/shared/AppImage';
+import AppText from '@components/shared/AppText';
+import RatingStars from '@components/products/RatingStars';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'ProductDetail'>;
+type Props = AppStackScreenProps<typeof SCREENS.PRODUCT_DETAILS>;
 
 const ProductDetailScreen = ({ route }: Props) => {
   const { product } = route.params;
-  const [imgError, setImgError] = useState(false);
 
   return (
     <ScrollView
@@ -27,19 +20,7 @@ const ProductDetailScreen = ({ route }: Props) => {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.imageContainer}>
-        {imgError ? (
-          <View style={styles.imageFallback}>
-            <AppText style={styles.fallbackEmoji}>🖼</AppText>
-            <AppText style={styles.fallbackText}>Image unavailable</AppText>
-          </View>
-        ) : (
-          <Image
-            source={{ uri: product.image }}
-            style={styles.image}
-            resizeMode="contain"
-            onError={() => setImgError(true)}
-          />
-        )}
+        <AppImage source={{ uri: product.image }} style={styles.image} />
       </View>
 
       <View style={styles.badge}>
@@ -63,14 +44,6 @@ const ProductDetailScreen = ({ route }: Props) => {
         <View style={styles.stockDot} />
         <AppText style={styles.stockText}>In Stock · Free shipping</AppText>
       </View>
-
-      <TouchableOpacity style={styles.cartButton} activeOpacity={0.85}>
-        <AppText style={styles.cartButtonText}>Add to Cart</AppText>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.wishlistButton} activeOpacity={0.85}>
-        <AppText style={styles.wishlistButtonText}>♡ Add to Wishlist</AppText>
-      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -157,33 +130,6 @@ const styles = StyleSheet.create({
   stockText: {
     fontSize: rms(13),
     color: COLORS.success.dark,
-  },
-  cartButton: {
-    backgroundColor: COLORS.primary.main,
-    borderRadius: rs(14),
-    paddingVertical: rs(16),
-    alignItems: 'center',
-    marginTop: rs(24),
-  },
-  cartButtonText: {
-    color: COLORS.white,
-    fontSize: rms(16),
-    letterSpacing: 0.3,
-    fontFamily: FONTS.MANROPE_BOLD,
-  },
-  wishlistButton: {
-    borderRadius: rs(14),
-    paddingVertical: rs(14),
-    alignItems: 'center',
-    marginTop: rs(10),
-    borderWidth: 1.5,
-    borderColor: COLORS.border.primary,
-    backgroundColor: COLORS.background.card,
-  },
-  wishlistButtonText: {
-    color: COLORS.text.label,
-    fontSize: rms(15),
-    fontFamily: FONTS.MANROPE_MEDIUM,
   },
 });
 

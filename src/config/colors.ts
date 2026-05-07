@@ -61,4 +61,9 @@ export const COLORS = {
     half: '#FFD54F',
     empty: '#E0E0E0',
   },
+
+  shimmer: {
+    base: '#F2F2F2',
+    highlight: '#D8DED3',
+  },
 } as const;

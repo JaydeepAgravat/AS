@@ -39,6 +39,8 @@ const CommonPopup = ({
       transparent
       animationType="fade"
       onRequestClose={onCancel}
+      navigationBarTranslucent
+      statusBarTranslucent
     >
       <TouchableWithoutFeedback onPress={onCancel}>
         <View style={styles.backdrop}>

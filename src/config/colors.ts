@@ -14,8 +14,12 @@ export const COLORS = {
     primary: '#2C2C2C',
     secondary: '#666666',
     tertiary: '#999999',
-    placeholder: '#B3B3B3',
+    placeholder: '#9CA3AF',
     label: '#424242',
+  },
+
+  component: {
+    overlay: 'rgba(0, 0, 0, 0.5)',
   },
 
   border: {

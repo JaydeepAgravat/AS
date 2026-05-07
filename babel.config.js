@@ -13,7 +13,6 @@ module.exports = {
           '@context': './src/context',
           '@navigation': './src/navigation',
           '@screens': './src/screens',
-          '@storage': './src/storage',
           '@appTypes': './src/appTypes',
           '@utils': './src/utils',
         },

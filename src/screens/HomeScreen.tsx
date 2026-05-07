@@ -41,12 +41,10 @@ const HomeScreen = ({ navigation }: Props) => {
   const { justReconnected } = useNetwork();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  // Initial load
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // Reset pagination when the search query changes.
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
   }, [searchQuery]);
@@ -56,7 +54,6 @@ const HomeScreen = ({ navigation }: Props) => {
     [filteredProducts, visibleCount],
   );
 
-  // Auto-retry when network is restored and we have an error or no products
   useEffect(() => {
     if (justReconnected && (error || products.length === 0)) {
       fetchProducts();
@@ -89,12 +86,10 @@ const HomeScreen = ({ navigation }: Props) => {
 
   const keyExtractor = useCallback((item: Product) => item.id.toString(), []);
 
-  // Full-screen loading (first load only)
   if (isLoading && products.length === 0) {
     return <AppLoader message="Loading products..." />;
   }
 
-  // Full-screen error (no products to show)
   if (error && products.length === 0) {
     return (
       <ErrorMessage
@@ -109,7 +104,6 @@ const HomeScreen = ({ navigation }: Props) => {
 
   return (
     <View style={styles.container}>
-      {/* Inline error banner (when we have products but refresh failed) */}
       {error && products.length > 0 ? (
         <View style={styles.inlineError}>
           <AppText style={styles.inlineErrorText}>{error}</AppText>
@@ -124,7 +118,6 @@ const HomeScreen = ({ navigation }: Props) => {
         </View>
       ) : null}
 
-      {/* Search bar */}
       <View style={styles.searchWrapper}>
         <AppText style={styles.searchIcon}>🔍</AppText>
         <TextInput
@@ -134,9 +127,8 @@ const HomeScreen = ({ navigation }: Props) => {
           value={searchQuery}
           onChangeText={setSearchQuery}
           returnKeyType="search"
-          clearButtonMode="while-editing" // iOS only
+          clearButtonMode="while-editing"
         />
-        {/* Android clear button */}
         {Platform.OS === 'android' && searchQuery.length > 0 ? (
           <TouchableOpacity onPress={() => setSearchQuery('')}>
             <AppText style={styles.clearBtn}>✕</AppText>
@@ -144,7 +136,6 @@ const HomeScreen = ({ navigation }: Props) => {
         ) : null}
       </View>
 
-      {/* Result count for search */}
       {searchQuery.trim().length > 0 ? (
         <AppText style={styles.resultCount}>
           {filteredProducts.length} result
@@ -152,7 +143,6 @@ const HomeScreen = ({ navigation }: Props) => {
         </AppText>
       ) : null}
 
-      {/* Product grid */}
       <FlatList
         data={paginatedProducts}
         renderItem={renderItem}

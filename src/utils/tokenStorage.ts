@@ -1,30 +1,30 @@
 import { createMMKV } from 'react-native-mmkv';
 
-const storage = createMMKV({ id: 'auth-storage' });
+const storage = createMMKV({ id: 'root' });
 
 const ACCESS_TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
 
 export const TokenStorage = {
-  setTokens(accessToken: string, refreshToken: string): void {
+  setTokens(accessToken: string, refreshToken: string) {
     storage.set(ACCESS_TOKEN_KEY, accessToken);
     storage.set(REFRESH_TOKEN_KEY, refreshToken);
   },
 
-  getAccessToken(): string | undefined {
+  getAccessToken() {
     return storage.getString(ACCESS_TOKEN_KEY);
   },
 
-  getRefreshToken(): string | undefined {
+  getRefreshToken() {
     return storage.getString(REFRESH_TOKEN_KEY);
   },
 
-  clearTokens(): void {
+  clearTokens() {
     storage.remove(ACCESS_TOKEN_KEY);
     storage.remove(REFRESH_TOKEN_KEY);
   },
 
-  hasTokens(): boolean {
+  hasTokens() {
     return storage.contains(ACCESS_TOKEN_KEY);
   },
 };

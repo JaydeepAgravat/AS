@@ -19,8 +19,6 @@ import {
   View,
 } from 'react-native';
 
-// FakeStoreAPI test credentials: mor_2314 / 83r5^_
-
 interface FieldErrors {
   username?: string;
   password?: string;
@@ -36,7 +34,6 @@ const LoginScreen = () => {
   const { login } = useAuth();
   const { isConnected } = useNetwork();
 
-  // ── Validation ──────────────────────────────────────────────────────────────
   const validate = (): boolean => {
     const errors: FieldErrors = {};
     if (!username.trim()) {
@@ -55,7 +52,6 @@ const LoginScreen = () => {
     setFieldErrors(prev => ({ ...prev, [field]: undefined }));
   };
 
-  // ── Submit ──────────────────────────────────────────────────────────────────
   const handleLogin = async () => {
     if (!validate()) return;
 
@@ -67,7 +63,6 @@ const LoginScreen = () => {
     setIsLoading(true);
     try {
       await login(username.trim(), password);
-      // Navigation handled automatically by RootNavigator on isAuthenticated change
     } catch (err: any) {
       const status = err?.response?.status;
 
@@ -94,7 +89,6 @@ const LoginScreen = () => {
     }
   };
 
-  // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <KeyboardAvoidingView
       style={styles.flex}
@@ -105,7 +99,6 @@ const LoginScreen = () => {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {/* Header */}
         <View style={styles.header}>
           <View style={styles.logoBox}>
             <Image source={ICONS.BAG} style={styles.bagIcon} />
@@ -114,7 +107,6 @@ const LoginScreen = () => {
           <AppText style={styles.subtitle}>Sign in to continue</AppText>
         </View>
 
-        {/* Offline notice */}
         {!isConnected && (
           <View style={styles.offlineNotice}>
             <AppText style={styles.offlineText}>
@@ -123,9 +115,7 @@ const LoginScreen = () => {
           </View>
         )}
 
-        {/* Form */}
         <View style={styles.form}>
-          {/* Username */}
           <View style={styles.inputGroup}>
             <AppText style={styles.label}>Username</AppText>
             <TextInput
@@ -134,7 +124,7 @@ const LoginScreen = () => {
                 fieldErrors.username ? styles.inputError : null,
               ]}
               placeholder="Enter your username"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor={COLORS.text.placeholder}
               value={username}
               onChangeText={t => {
                 setUsername(t);
@@ -154,7 +144,6 @@ const LoginScreen = () => {
             ) : null}
           </View>
 
-          {/* Password */}
           <View style={styles.inputGroup}>
             <AppText style={styles.label}>Password</AppText>
             <TextInput
@@ -164,7 +153,7 @@ const LoginScreen = () => {
                 fieldErrors.password ? styles.inputError : null,
               ]}
               placeholder="Enter your password"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor={COLORS.text.placeholder}
               value={password}
               onChangeText={t => {
                 setPassword(t);
@@ -182,7 +171,6 @@ const LoginScreen = () => {
             ) : null}
           </View>
 
-          {/* Submit */}
           <TouchableOpacity
             style={[
               styles.loginButton,
@@ -193,7 +181,7 @@ const LoginScreen = () => {
             activeOpacity={0.85}
           >
             {isLoading ? (
-              <ActivityIndicator color="#fff" />
+              <ActivityIndicator color={COLORS.white} />
             ) : (
               <AppText style={styles.loginButtonText}>Sign In</AppText>
             )}

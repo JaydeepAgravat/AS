@@ -71,14 +71,12 @@ const RootNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={sharedScreenOptions}>
         {!isAuthenticated ? (
-          // ── Unauthenticated ───────────────────────────────────────────────
           <Stack.Screen
             name="Login"
             component={LoginScreen}
             options={{ headerShown: false }}
           />
         ) : (
-          // ── Authenticated (protected) ─────────────────────────────────────
           <>
             <Stack.Screen
               name="Home"

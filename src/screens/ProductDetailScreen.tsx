@@ -26,7 +26,6 @@ const ProductDetailScreen = ({ route }: Props) => {
       contentContainerStyle={styles.content}
       showsVerticalScrollIndicator={false}
     >
-      {/* Image */}
       <View style={styles.imageContainer}>
         {imgError ? (
           <View style={styles.imageFallback}>
@@ -43,35 +42,28 @@ const ProductDetailScreen = ({ route }: Props) => {
         )}
       </View>
 
-      {/* Category badge */}
       <View style={styles.badge}>
         <AppText style={styles.badgeText}>
           {product.category.toUpperCase()}
         </AppText>
       </View>
 
-      {/* Title */}
       <AppText style={styles.title}>{product.title}</AppText>
-
-      {/* Price */}
       <AppText style={styles.price}>${product.price.toFixed(2)}</AppText>
 
-      {/* Rating */}
       <RatingStars rate={product.rating.rate} count={product.rating.count} />
 
       <View style={styles.divider} />
 
-      {/* Description */}
       <AppText style={styles.sectionTitle}>Description</AppText>
+
       <AppText style={styles.description}>{product.description}</AppText>
 
-      {/* Stock info */}
       <View style={styles.stockRow}>
         <View style={styles.stockDot} />
         <AppText style={styles.stockText}>In Stock · Free shipping</AppText>
       </View>
 
-      {/* CTA */}
       <TouchableOpacity style={styles.cartButton} activeOpacity={0.85}>
         <AppText style={styles.cartButtonText}>Add to Cart</AppText>
       </TouchableOpacity>

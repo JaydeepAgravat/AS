@@ -3,7 +3,7 @@ import { TokenStorage } from '../utils/tokenStorage';
 
 export const BASE_URL = 'https://fakestoreapi.com';
 
-// Module-level logout callback — set by AuthContext on mount
+// set by AuthContext on mount
 let _logoutCallback: (() => void) | null = null;
 
 export const registerLogout = (fn: () => void): void => {
@@ -16,7 +16,6 @@ export const apiClient = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// ── Request interceptor: attach access token (MMKV is sync → no async) ───────
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = TokenStorage.getAccessToken();
@@ -28,7 +27,6 @@ apiClient.interceptors.request.use(
   error => Promise.reject(error),
 );
 
-// ── 401 response interceptor with refresh-token queue pattern ────────────────
 let isRefreshing = false;
 let pendingQueue: Array<{
   resolve: (token: string) => void;
@@ -51,12 +49,10 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // Pass through non-401 errors and already-retried requests
     if (error.response?.status !== 401 || original._retry) {
       return Promise.reject(error);
     }
 
-    // Queue concurrent 401s while refresh is in progress
     if (isRefreshing) {
       return new Promise<string>((resolve, reject) => {
         pendingQueue.push({ resolve, reject });
@@ -73,9 +69,9 @@ apiClient.interceptors.response.use(
       const refreshToken = TokenStorage.getRefreshToken();
       if (!refreshToken) throw new Error('No refresh token available');
 
-      // FakeStoreAPI has no real refresh endpoint.
-      // Production pattern: POST /auth/refresh { refreshToken } → { accessToken }
-      // Here: derive new access token from stored refresh token (demo only)
+      // NOTE: FakeStoreAPI has no real refresh endpoint.
+      // TODO: In a real application, : POST /auth/refresh { refreshToken } → { accessToken }
+      // NOTE: derive new access token from stored refresh token
       const newAccessToken = refreshToken.replace('refresh_', '');
       TokenStorage.setTokens(newAccessToken, `refresh_${newAccessToken}`);
 
@@ -84,7 +80,7 @@ apiClient.interceptors.response.use(
       return apiClient(original);
     } catch (refreshError) {
       flushQueue(refreshError, null);
-      // Force logout — clears MMKV + resets auth state
+      // Force logout
       _logoutCallback?.();
       return Promise.reject(refreshError);
     } finally {

@@ -7,8 +7,6 @@ interface LoginPayload {
   password: string;
 }
 
-// FakeStoreAPI: POST /auth/login → { token: string }
-// We add a simulated refresh token since the API doesn't provide one
 export const loginApi = async ({
   username,
   password,
@@ -19,6 +17,8 @@ export const loginApi = async ({
     { timeout: 12000 },
   );
 
+  // TODO: In a real application, the refresh token would be provided by the server
+  // NOTE: FakeStoreAPI: POST /auth/login → { token: string },  FakeStoreAPI doesn't provide refresh token
   return {
     accessToken: data.token,
     refreshToken: `refresh_${data.token}`,

@@ -64,12 +64,6 @@ const toNativeSource = (source: AppImageSource): NativeImageSource => {
   }
 
   if (Array.isArray(source)) {
-    if (__DEV__ && source.length > 1) {
-      console.warn(
-        '[AppImage] Array sources with multiple entries are not fully supported. Using only the first source.',
-      );
-    }
-
     const first = source[0];
     if (!first) {
       return { uri: '' };
@@ -198,7 +192,6 @@ const AppImage = ({
 
   const shouldUseShimmer = shimmerEnabled && hasRemoteUri(normalizedSource);
 
-  // Reset all state before paint when primary source changes.
   useLayoutEffect(() => {
     setHasError(false);
     setShowErrorFallback(false);
@@ -246,11 +239,9 @@ const AppImage = ({
   const handleError: FastImageProps['onError'] = useCallback(
     (event: OnErrorEvent) => {
       if (!hasError && fallbackNormalizedSource) {
-        // first failure — try fallback source
         setHasError(true);
         setIsLoaded(false);
       } else {
-        // no fallback left — show dummy placeholder view
         setShowErrorFallback(true);
         setIsLoaded(true);
       }
@@ -278,7 +269,6 @@ const AppImage = ({
     />
   ) : null;
 
-  // Dummy view shown when both primary and fallback sources fail.
   const errorFallback = showErrorFallback ? (
     <View style={[styles.errorImageContainer]}>
       <FastImage source={ICONS.IMG_ERROR} style={styles.errorImage} />

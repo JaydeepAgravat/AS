@@ -4,7 +4,6 @@ import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 interface NetworkContextType {
   isConnected: boolean;
   isInternetReachable: boolean | null;
-  // True only when transitioning from offline → online
   justReconnected: boolean;
 }
 
@@ -30,11 +29,9 @@ export const NetworkProvider = ({
   const handleNetworkChange = (state: NetInfoState) => {
     const connected = state.isConnected ?? false;
 
-    // Detect reconnection
     if (prevConnected.current === false && connected) {
       setJustReconnected(true);
       if (reconnectTimer.current) clearTimeout(reconnectTimer.current);
-      // Reset justReconnected flag after consumers have reacted
       reconnectTimer.current = setTimeout(() => setJustReconnected(false), 500);
     }
 
@@ -44,10 +41,8 @@ export const NetworkProvider = ({
   };
 
   useEffect(() => {
-    // Fetch initial state
     NetInfo.fetch().then(handleNetworkChange);
 
-    // Subscribe to changes
     const unsubscribe = NetInfo.addEventListener(handleNetworkChange);
 
     return () => {

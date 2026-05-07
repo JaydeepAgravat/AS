@@ -9,8 +9,6 @@ import NetInfo from '@react-native-community/netinfo';
 import { Product } from '@appTypes/index';
 import { fetchProductsApi } from '@api/products';
 
-// ── State & Actions ────────────────────────────────────────────────────────────
-
 interface ProductState {
   products: Product[];
   filteredProducts: Product[];
@@ -37,7 +35,6 @@ const initialState: ProductState = {
   searchQuery: '',
 };
 
-// Filter helper — extracted to keep reducer pure
 function applyFilter(products: Product[], query: string): Product[] {
   if (!query.trim()) return products;
   return products.filter(p =>
@@ -83,8 +80,6 @@ function productReducer(
   }
 }
 
-// ── Context Type ──────────────────────────────────────────────────────────────
-
 interface ProductContextType extends ProductState {
   fetchProducts: (isRefresh?: boolean) => Promise<void>;
   setSearchQuery: (query: string) => void;
@@ -95,7 +90,6 @@ const ProductContext = createContext<ProductContextType>(
   {} as ProductContextType,
 );
 
-// ── Error message resolver ────────────────────────────────────────────────────
 function resolveErrorMessage(err: any): string {
   if (!err?.response) {
     return 'Network error. Check your internet connection.';
@@ -117,8 +111,6 @@ function resolveErrorMessage(err: any): string {
   }
 }
 
-// ── Provider ──────────────────────────────────────────────────────────────────
-
 export const ProductProvider = ({
   children,
 }: {
@@ -126,16 +118,13 @@ export const ProductProvider = ({
 }) => {
   const [state, dispatch] = useReducer(productReducer, initialState);
 
-  // Refs guard against double invocations (stable across renders)
   const loadingRef = useRef({ isLoading: false, isRefreshing: false });
 
   const fetchProducts = useCallback(
     async (isRefresh = false): Promise<void> => {
-      // Guard: prevent concurrent same-type fetches
       if (!isRefresh && loadingRef.current.isLoading) return;
       if (isRefresh && loadingRef.current.isRefreshing) return;
 
-      // Check network before hitting the API
       const netState = await NetInfo.fetch();
       if (!netState.isConnected) {
         dispatch({
@@ -167,7 +156,7 @@ export const ProductProvider = ({
         }
       }
     },
-    [], // stable — refs used for guard, not state
+    [],
   );
 
   const setSearchQuery = useCallback((query: string): void => {

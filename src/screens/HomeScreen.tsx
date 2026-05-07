@@ -37,15 +37,12 @@ const HomeScreen = ({ navigation }: Props) => {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
 
-  // Use custom debounce hook
   const debouncedSearchQuery = useDebounce(localSearchQuery, 300);
 
-  // Update context when debounced value changes
   useEffect(() => {
     setSearchQuery(debouncedSearchQuery);
   }, [debouncedSearchQuery, setSearchQuery]);
 
-  // Sync local state when context searchQuery changes externally
   useEffect(() => {
     setLocalSearchQuery(searchQuery);
   }, [searchQuery]);
@@ -58,17 +55,16 @@ const HomeScreen = ({ navigation }: Props) => {
     setVisibleCount(PAGE_SIZE);
   }, [searchQuery]);
 
-  const paginatedProducts = useMemo(
-    () => filteredProducts.slice(0, visibleCount),
-    [filteredProducts, visibleCount],
-  );
-
   useEffect(() => {
     if (justReconnected && (error || products.length === 0)) {
       fetchProducts();
     }
   }, [justReconnected, error, products.length, fetchProducts]);
 
+  const paginatedProducts = useMemo(
+    () => filteredProducts.slice(0, visibleCount),
+    [filteredProducts, visibleCount],
+  );
   const handleRefresh = useCallback(() => {
     fetchProducts(true);
   }, [fetchProducts]);

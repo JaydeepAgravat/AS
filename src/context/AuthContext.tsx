@@ -13,8 +13,6 @@ import {
   clearAppImageMemoryCache,
 } from '@components/shared/AppImage';
 
-// ── State & Actions ────────────────────────────────────────────────────────────
-
 interface AuthState {
   isAuthenticated: boolean;
   accessToken: string | null;
@@ -69,8 +67,6 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
   }
 }
 
-// ── Context Type ──────────────────────────────────────────────────────────────
-
 interface AuthContextType extends AuthState {
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
@@ -78,12 +74,9 @@ interface AuthContextType extends AuthState {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-// ── Provider ──────────────────────────────────────────────────────────────────
-
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Register logout handler with API client (runs once; dispatch is stable)
   useEffect(() => {
     registerLogout(() => {
       TokenStorage.clearTokens();
@@ -91,7 +84,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     });
   }, []);
 
-  // Read tokens from MMKV synchronously on mount — no flicker
   useEffect(() => {
     const accessToken = TokenStorage.getAccessToken() ?? null;
     const refreshToken = TokenStorage.getRefreshToken() ?? null;
@@ -100,7 +92,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = useCallback(
     async (username: string, password: string): Promise<void> => {
-      // Throws on error — LoginScreen handles it
       const { accessToken, refreshToken } = await loginApi({
         username,
         password,

@@ -3,7 +3,7 @@ import { TokenStorage } from '../utils/tokenStorage';
 
 export const BASE_URL = 'https://fakestoreapi.com';
 
-// set by AuthContext on mount
+// NOTE: set by AuthContext on mount
 let _logoutCallback: (() => void) | null = null;
 
 export const registerLogout = (fn: () => void): void => {

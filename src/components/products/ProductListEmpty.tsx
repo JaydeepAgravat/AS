@@ -7,7 +7,7 @@ import { rms, rs } from '@utils/scaling';
 const ProductListEmpty = () => {
   return (
     <View style={styles.container}>
-      <AppText style={styles.icon}>🔍</AppText>{' '}
+      <AppText style={styles.icon}>🔍</AppText>
       <AppText style={styles.title}>No products found</AppText>
       <AppText style={styles.subtitle}>Try a different search term</AppText>
     </View>

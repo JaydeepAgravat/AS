@@ -1,4 +1,3 @@
-import React from 'react';
 import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import AppText from '@components/shared/AppText';
 import { COLORS } from '@config/colors';

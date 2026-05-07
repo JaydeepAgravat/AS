@@ -2,7 +2,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import BootSplash from 'react-native-bootsplash';
-
 import { NetworkProvider } from '@context/NetworkContext';
 import { AuthProvider, useAuth } from '@context/AuthContext';
 import { ProductProvider } from '@context/ProductContext';
